@@ -2,19 +2,16 @@
 
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
-const getAuthFn = require('znakchat-auth');
 const Router = require('express').Router;
 
 const components = require('attachments-components');
 const logging = components.logging.getWrapperForModule('routes');
-const redis = components.redis;
 const settings = components.settings;
 
+const auth = require('./auth');
 const downloadThumb = require('./handlers/download_thumb');
 const download = require('./handlers/download');
 const upload = require('./handlers/upload');
-
-const auth = getAuthFn(redis, settings.redis.prefix.sessions);
 
 const corsOptions = {
   credentials: true,
@@ -35,10 +32,11 @@ function routes(app) {
   app.use(cookieParser());
   app.options('*', cors(preflight));
 
-  let authType = settings.server.auth;
+  let authType = settings.server.auth.type;
+  let allowedIPs = settings.server.auth.allowedIPs;
   let authWrapper = (request, response, next) => {
-    auth(request.cookies).then(() => next()).catch((error) => {
-      if (error instanceof getAuthFn.AuthError) {
+    auth(allowedIPs, request.ip).then(() => next()).catch((error) => {
+      if (error instanceof auth.AuthError) {
         response.sendStatus(403);
       } else {
         response.sendStatus(500);

@@ -20,14 +20,18 @@
       "datetime": "ATTACHMENTS.DATETIME.INDEX"
     },
     "prefix": {
-      "sessions": "SESSIONS_",
       "attachments": "ATTACHMENTS_"
     },
     "url": "redis://localhost"
   },
 
   "server": {
-    "auth": "partial",
+    "auth": {
+      "type": "partial",
+      "allowedIPs": [
+         ".*", "192\\.168\\..*\\..*", "::1", "localhost", "127\\.0\\.0\\.1"
+      ]
+    },
     "cache": 604800,
     "size": 26214400,
     "port": 8080,
