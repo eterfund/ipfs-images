@@ -9,6 +9,7 @@ const logging = components.logging.getWrapperForModule('routes');
 const settings = components.settings;
 
 const auth = require('./auth');
+const delAttachment = require('./handlers/del_attachment');
 const downloadThumb = require('./handlers/download_thumb');
 const download = require('./handlers/download');
 const upload = require('./handlers/upload');
@@ -64,6 +65,9 @@ function routes(app) {
     next();
   });
 
+  app.delete('/del/:hash', cors(corsOptions), (request, response) =>
+    delAttachment(request, response)
+  );
   app.get('/dl/thumb/:size/:hash', cors(corsOptions), (request, response) =>
     downloadThumb(request, response)
   );
