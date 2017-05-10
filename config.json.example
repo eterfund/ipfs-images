@@ -1,0 +1,52 @@
+{
+  "logging": {
+    "transports": [{
+        "type": "console",
+        "level": "info",
+        "exceptions": false
+      },
+      {
+        "type": "file",
+        "level": "info",
+        "path": "/path/to/log/server.log",
+        "exceptions": false
+      }
+    ]
+  },
+
+  "redis": {
+    "options": {},
+    "index": {
+      "datetime": "ATTACHMENTS.DATETIME.INDEX"
+    },
+    "prefix": {
+      "sessions": "SESSIONS_",
+      "attachments": "ATTACHMENTS_"
+    },
+    "url": "redis://localhost"
+  },
+
+  "server": {
+    "auth": "partial",
+    "cache": 604800,
+    "size": 26214400,
+    "port": 8080,
+    "headers": {
+      "origin": "scheme://host:port"
+    }
+  },
+
+  "ipfs": {
+    "url": "/ip4/ip_addr/tcp/5001"
+  },
+
+  "thumbnails": {
+    "cache": false,
+    "expire": 86400,
+    "interval": 3600,
+    "path": "/path/to/thumbnails",
+    "sizes": [
+      64, 128, 192, 256, 512
+    ]
+  }
+}
