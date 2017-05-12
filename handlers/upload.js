@@ -88,4 +88,4 @@ function upload(request, response) {
     .catch((error) => logging.error(error));
 }
 
-module.expors = upload;
+module.exports = upload;
