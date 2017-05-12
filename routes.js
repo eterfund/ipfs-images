@@ -9,6 +9,7 @@ const logging = components.logging.getWrapperForModule('routes');
 const settings = components.settings;
 
 const auth = require('./auth');
+const checkIntegrity = require('./handlers/check_integrity');
 const delAttachment = require('./handlers/del_attachment');
 const downloadThumb = require('./handlers/download_thumb');
 const download = require('./handlers/download');
@@ -76,6 +77,10 @@ function routes(app) {
   );
   app.post('/ul', cors(corsOptions), (request, response) =>
     upload(request, response)
+  );
+
+  app.get('/api/integrity', cors(corsOptions), (request, response) =>
+    checkIntegrity(request, response)
   );
 }
 
