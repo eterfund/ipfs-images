@@ -4,7 +4,7 @@
   "description": "Attachments server",
   "main": "server.js",
   "dependencies": {
-    "attachments-components": "git+ssh://git@gitlab.eterfund.ru:vldslv/attachments-components.git",
+    "attachments-components": "git+ssh://git@gitlab.eterfund.ru:vldslv/attachments-components.git#433a289ddd3797dcd8278a3f90e6def75f524284",
     "bluebird": "3.5.0",
     "cookie-parser": "1.4.3",
     "cors": "2.8.3",
