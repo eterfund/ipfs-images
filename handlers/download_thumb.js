@@ -2,7 +2,7 @@
 
 const Promise = require('bluebird');
 
-const components = require('attachments-components');
+const components = require('ipfs-images-components');
 const FileNotFoundError = components.errors.FileNotFoundError;
 const logging = components.logging.getWrapperForModule('download_thumb');
 const Metadata = components.metadata;

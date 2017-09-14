@@ -6,7 +6,7 @@ const http = require('http');
 
 global.appRoot = path.resolve(__dirname);
 
-const components = require('attachments-components');
+const components = require('ipfs-images-components');
 const logging = components.logging.getWrapperForModule('server');
 const settings = components.settings;
 const routes = require('./routes');

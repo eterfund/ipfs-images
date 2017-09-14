@@ -1,7 +1,6 @@
-# Attachments
+# ipfs-images
 
-Attachments server.
-
+IPFS images server, implemented using ipfs-images-components.
 ## Classes
 
 <dl>

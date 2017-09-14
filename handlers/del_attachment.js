@@ -1,6 +1,6 @@
 'use strict';
 
-const components = require('attachments-components');
+const components = require('ipfs-images-components');
 const Cleaner = components.cleaner;
 const FileNotFoundError = components.errors.FileNotFoundError;
 const logging = components.logging.getWrapperForModule('del_attachment');

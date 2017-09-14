@@ -4,7 +4,7 @@ const fs = require('fs-extra');
 const multiparty = require('multiparty');
 const Promise = require('bluebird');
 
-const components = require('attachments-components');
+const components = require('ipfs-images-components');
 const Ipfs = components.ipfs;
 const logging = components.logging.getWrapperForModule('upload');
 const Metadata = components.metadata;

@@ -1,6 +1,6 @@
 'use strict';
 
-const components = require('attachments-components');
+const components = require('ipfs-images-components');
 const Pin = components.pin;
 const FileNotFoundError = components.errors.FileNotFoundError;
 const logging = components.logging.getWrapperForModule('check_integrity');

@@ -4,7 +4,7 @@ const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const Router = require('express').Router;
 
-const components = require('attachments-components');
+const components = require('ipfs-images-components');
 const logging = components.logging.getWrapperForModule('routes');
 const settings = components.settings;
 

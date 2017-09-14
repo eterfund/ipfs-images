@@ -1,6 +1,6 @@
 'use strict';
 
-const components = require('attachments-components');
+const components = require('ipfs-images-components');
 const logging = components.logging.getWrapperForModule('auth');
 
 /**
