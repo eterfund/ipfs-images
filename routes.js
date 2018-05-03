@@ -9,11 +9,6 @@ const logging = components.logging.getWrapperForModule('routes');
 const settings = components.settings;
 
 const auth = require('./auth');
-const checkIntegrity = require('./handlers/check_integrity');
-const delAttachment = require('./handlers/del_attachment');
-const downloadThumb = require('./handlers/download_thumb');
-const download = require('./handlers/download');
-const upload = require('./handlers/upload');
 
 const corsOptions = {
   credentials: true,
@@ -47,6 +42,16 @@ function routes(app) {
     });
   };
 
+  const storage = settings.server.storage.type === 'ipfs' ? (
+    new components.storageBackends.IpfsStorage(
+      settings.server.storage.options.url
+    )
+  ) : new components.storageBackends.FilesystemStorage(
+    settings.server.storage.options.basePath
+  );
+  const thumbnailsStorage = new components.thumbnail(storage);
+  const metadata = new components.metadata();
+
   let router = new Router();
   if (authType === 'full') {
     router.use('/', authWrapper);
@@ -66,17 +71,23 @@ function routes(app) {
     next();
   });
 
-  app.delete('/del/:hash', cors(corsOptions), (request, response) =>
-    delAttachment(request, response)
+  app.delete('/del/:hash', cors(corsOptions),
+    components.handlers.delAttachment(storage)
   );
-  app.get('/dl/thumb/:size/:hash', cors(corsOptions), (request, response) =>
-    downloadThumb(request, response)
+  app.get('/dl/thumb/:size/:hash', cors(corsOptions),
+    components.handlers.downloadThumb(thumbnailsStorage, metadata, {
+      CACHE_DURATION: settings.server.cache
+    })
   );
-  app.get('/dl/:hash/:filename', cors(corsOptions), (request, response) =>
-    download(request, response)
+  app.get('/dl/:hash/:filename', cors(corsOptions), 
+    components.handlers.download(storage, metadata, {
+      CACHE_DURATION: settings.server.cache
+    })
   );
-  app.post('/ul', cors(corsOptions), (request, response) =>
-    upload(request, response)
+  app.post('/ul', cors(corsOptions),
+    components.handlers.upload(storage, metadata, {
+      MAX_FILE_SIZE: settings.server.size
+    })
   );
 
   app.get('/api/integrity', cors(corsOptions), (request, response) =>

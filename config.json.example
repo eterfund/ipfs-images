@@ -35,13 +35,15 @@
     "cache": 604800,
     "size": 26214400,
     "port": 8080,
+    "storage": {
+      "type": "ipfs",
+      "options": {
+        "url": "/ip4/ip_addr/tcp/5001"
+      }
+    }
     "headers": {
       "origin": "scheme://host:port"
     }
-  },
-
-  "ipfs": {
-    "url": "/ip4/ip_addr/tcp/5001"
   },
 
   "thumbnails": {
